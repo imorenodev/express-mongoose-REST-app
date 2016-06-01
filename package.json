@@ -1,0 +1,28 @@
+{
+  "name": "express-mongoose-REST-app",
+  "version": "1.0.0",
+  "description": "Full stack REST API using express, mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imorenodev/express-mongoose-REST-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imorenodev/express-mongoose-REST-app/issues"
+  },
+  "homepage": "https://github.com/imorenodev/express-mongoose-REST-app#readme",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongodb": "^2.1.21",
+    "morgan": "^1.7.0",
+    "yargs": "^4.7.1"
+  }
+}
