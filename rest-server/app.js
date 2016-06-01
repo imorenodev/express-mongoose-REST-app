@@ -4,11 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var dishRouter = require('./routes/dishRouter');
+var promoRouter = require('./routes/promoRouter');
+var leaderRouter = require('./routes/leaderRouter');
 
 var app = express();
+
+var url = 'mongodb://localhost:27017/conFusion';
+mongoose.connect(url);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('Connected correctly to server');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +34,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// mount to appropriate URIs
 app.use('/', routes);
 app.use('/users', users);
+app.use('/dishes', dishRouter);
+app.use('/promotions', promoRouter);
+app.use('/leadership', leaderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
