@@ -1,0 +1,28 @@
+{
+  "name": "node-examples",
+  "version": "1.0.0",
+  "description": "Coursera Course: Server side development with NodeJS, Express, MongoDB",
+  "main": "rectangle-1.js",
+  "dependencies": {
+    "assert": "^1.4.0",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongodb": "^2.1.20",
+    "morgan": "^1.7.0",
+    "yargs": "^4.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imorenodev/node-examples.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imorenodev/node-examples/issues"
+  },
+  "homepage": "https://github.com/imorenodev/node-examples#readme"
+}
