@@ -1,0 +1,25 @@
+// dish input
+{
+  "name": "pizza",
+  "image": "images/pizza.jpg",
+  "category": "italian",
+  "label": "fast",
+  "price": "$4.99",
+  "description": "NJ's finest pizza!"
+}
+
+// dish comments
+{
+  "rating": "3",
+  "comment": "alright, so so",
+  "author": "iansir"
+}
+
+// promotions input
+{
+  "name": "half-off!",
+  "image": "images/half-off.jpg",
+  "label": "discount",
+  "price": "$2.99",
+  "description": "a limited time 50% off promotion!"
+}

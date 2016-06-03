@@ -33,3 +33,17 @@ exports.verifyOrdinaryUser = function (req, res, next) {
     return next(err);
   }
 };
+
+exports.verifyAdmin = function (req, res, next) {
+  // get token from req.decoded._doc.admin
+  var userIsAdmin = req.decoded._doc.admin;
+  console.log('userIsAdmin: ', userIsAdmin);
+  if (userIsAdmin) {
+    next();
+  } else {
+    // if no token
+    var err = new Error('User is not authorized!');
+    err.status = 403;
+    return next(err);
+  }
+};
