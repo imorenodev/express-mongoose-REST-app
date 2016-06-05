@@ -11,10 +11,13 @@ dishRouter.use(bodyParser.json());
 dishRouter.route('/')
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     // empty object as first param will return ALL dishes
-    Dishes.find({}, function(err, dish) {
-      if (err) throw err;
-      res.json(dish);
-    });
+    // populate the dishes query with comments.postedBy
+    Dishes.find({})
+      .populate('comments.postedBy')
+      .exec(function(err, dish) {
+        if (err) throw err;
+        res.json(dish);
+      });
   })
   .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
     Dishes.create(req.body, function(err, dish) {
@@ -41,10 +44,12 @@ dishRouter.route('/')
 dishRouter.route('/:dishId')
   .get(Verify.verifyOrdinaryUser, function(req, res, next) {
     // req.params.dishId allows us to access :dishId from URI
-    Dishes.findById(req.params.dishId, function(err, dish) {
-      if (err) throw err;
-      res.json(dish);
-    });
+    Dishes.findById(req.params.dishId)
+      .populate('comments.postedBy')
+      .exec(function(err, dish) {
+        if (err) throw err;
+        res.json(dish);
+      });
   })
   .put(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
     Dishes.findByIdAndUpdate(req.params.dishId, 
@@ -74,10 +79,12 @@ dishRouter.route('/:dishId')
 dishRouter.route('/:dishId/comments')
   .all(Verify.verifyOrdinaryUser)
   .get(function(req, res, next) {
-    Dishes.findById(req.params.dishId, function(err, dish) {
-      if (err) throw err;
-      res.json(dish.comments);
-    });
+    Dishes.findById(req.params.dishId)
+      .populate('comments.postedBy')
+      .exec(function(err, dish) {
+        if (err) throw err;
+        res.json(dish.comments);
+      });
   })
   .post(function(req, res, next) {
     Dishes.findById(req.params.dishId, function(err, dish) {
@@ -116,10 +123,12 @@ dishRouter.route('/:dishId/comments')
 dishRouter.route('/:dishId/comments/:commentId')
   .all(Verify.verifyOrdinaryUser)
   .get(function(req, res, next) {
-    Dishes.findById(req.params.dishId, function(err, dish) {
-      if (err) throw err;
-      res.json(dish.comments.id(req.params.commentId));
-    });
+    Dishes.findById(req.params.dishId)
+      .populate('comments.postedBy')
+      .exec(function(err, dish) {
+        if (err) throw err;
+        res.json(dish.comments.id(req.params.commentId));
+      });
   })
   .put(function(req, res, next) {
     // We delete the existing comment and insert the updated comment
