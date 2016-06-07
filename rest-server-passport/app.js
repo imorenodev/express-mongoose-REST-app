@@ -16,6 +16,13 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 
+app.all('*', function(req, res, next) {
+  if (req.secure) {
+    return next();
+  }
+  res.redirect(`https://${req.hostname}:${app.get('secPort')}${req.url}`);
+});
+
 mongoose.connect(config.mongoUrl);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
