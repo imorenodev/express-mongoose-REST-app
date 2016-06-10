@@ -10,7 +10,7 @@ passport.deserializeUser(User.deserializeUser());
 
 exports.facebook = passport.use(new FacebookStrategy(
   {
-    clientID: config.facebook.clientSecret,
+    clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL
   },
