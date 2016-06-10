@@ -12,7 +12,7 @@ var promoRouter = require('./routes/promoRouter');
 var leaderRouter = require('./routes/leaderRouter');
 var config = require('./config');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var authenticate = require('./authenticate');
 
 var app = express();
 
@@ -43,11 +43,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // passport config
-var User = require('./models/user');
 app.use(passport.initialize());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
